@@ -49,6 +49,10 @@ tasks.withType<Test> {
 	useJUnitPlatform()
 }
 
+tasks.withType<Javadoc>(Javadoc::class.java) {
+    (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "-quiet")
+}
+
 tasks.register<Zip>("zipJavaDoc") {
     group = "documentation" // Группа, в которой будет отображаться задача
     description = "Packs the generated Javadoc into a zip archive"
