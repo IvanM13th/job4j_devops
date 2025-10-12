@@ -1,0 +1,13 @@
+[versions]
+lombok = "1.18.36"
+spring = "3.4.0"
+junit = "5.10.0"
+assertj = "3.24.2"
+
+[libraries]
+lombok = { module = "org.projectlombok:lombok", version.ref = "lombok" }
+springWeb = { module = "org.springframework.boot:spring-boot-starter-web", version.ref = "spring" }
+springTest = { module = "org.projectlombok:lombok", version.ref = "spring" }
+junitPlatform = { module = "org.projectlombok:lombok", version.ref = "junit" }
+junitJupiter = { module = "org.projectlombok:lombok", version.ref = "junit" }
+assertj = { module = "org.projectlombok:lombok", version.ref = "assertj" }
