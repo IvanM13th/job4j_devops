@@ -41,7 +41,6 @@ dependencies {
 	annotationProcessor(libs.lombok)
 	implementation(libs.springWeb)
 	testImplementation(libs.springTest)
-	testRuntimeOnly(libs.junitPlatform)
 	testImplementation(libs.junitJupiter)
 	testImplementation(libs.assertj)
 }
