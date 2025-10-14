@@ -15,7 +15,11 @@ class CalcApplicationTests {
     }
 
     @Test
-    void anotherTestTwo() {
+    void anotherTest2() {
+    }
+
+    @Test
+    void anotherTest3() {
     }
 
     @Test
