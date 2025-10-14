@@ -20,6 +20,9 @@ class CalcApplicationTests {
 
     @Test
     void anotherTest3() {
+
+    }@Test
+    void anotherTest4() {
     }
 
     @Test
