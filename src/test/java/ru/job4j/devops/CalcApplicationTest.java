@@ -11,6 +11,14 @@ class CalcApplicationTests {
     }
 
     @Test
+    void anotherTest() {
+    }
+
+    @Test
+    void anotherTestTwo() {
+    }
+
+    @Test
     void mainMethodTest() {
         CalcApplication.main(new String[] {});
     }
