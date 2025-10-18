@@ -1,4 +1,4 @@
-buildCache {
+/*buildCache {
     remote<HttpBuildCache> {
         fun getPropertyOrEnv(key: String): String? {
             return System.getenv(key) ?: providers.gradleProperty(key).orNull
@@ -23,6 +23,6 @@ buildCache {
             password = pswdStr
         }
     }
-}
+}*/
 
 rootProject.name = "DevOps"
