@@ -1,18 +1,10 @@
-FROM gradle:8.11.1-jdk21
-
-# Копируем исходники
+FROM gradle:8.11.1-jdk21 as builder
 RUN mkdir job4j_devops
 WORKDIR /job4j_devops
-
 COPY . .
+RUN gradle clean build -x test
 
-# Не собираем здесь! Собираем при запуске.
+FROM openjdk:21-ea-slim-bullseye
+COPY --from=builder /job4j_devops/build/libs/DevOps-1.0.0.jar DevOps-1.0.0.jar
 EXPOSE 8080
-
-# Создаём скрипт запуска
-RUN echo '#!/bin/bash\n\
-gradle clean build -x test && \n\
-java -jar build/libs/DevOps-1.0.0.jar\n'\
-> /run.sh && chmod +x /run.sh
-
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["java", "-jar", "DevOps-1.0.0.jar"]
