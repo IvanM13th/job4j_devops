@@ -2,7 +2,7 @@ FROM gradle:8.11.1-jdk21 as builder
 RUN mkdir job4j_devops
 WORKDIR /job4j_devops
 
-COPY build.gradle.kts settings.gradle.kts gradle.properties ./
+COPY build.gradle.kts settings.gradle.kts ./
 RUN gradle --no-daemon dependencies
 
 COPY . .
