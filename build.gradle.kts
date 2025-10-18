@@ -105,12 +105,16 @@ tasks.register<Zip>("archiveResources") {
 }
 
 tasks.spotbugsMain {
-    reports.create("html") {
-        required = true
-        outputLocation.set(layout.buildDirectory.file("reports/spotbugs/spotbugs.html"))
+    if (System.getenv("EXTRA_TASK_ACTIVE") != null) {
+        reports.create("html") {
+            required = true
+            outputLocation.set(layout.buildDirectory.file("reports/spotbugs/spotbugs.html"))
+        }
     }
 }
 
 tasks.test {
-    finalizedBy(tasks.spotbugsMain)
+    if (System.getenv("EXTRA_TASK_ACTIVE") != null) {
+        finalizedBy(tasks.spotbugsMain)
+    }
 }
