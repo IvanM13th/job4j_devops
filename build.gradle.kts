@@ -40,6 +40,10 @@ dependencies {
 	compileOnly(libs.lombok)
 	annotationProcessor(libs.lombok)
 	implementation(libs.springWeb)
+	implementation(libs.springData)
+	implementation(libs.liquibaseCore)
+	implementation(libs.postgresql)
+
 	testImplementation(libs.springTest)
 	testImplementation(libs.junitJupiter)
 	testImplementation(libs.assertj)
