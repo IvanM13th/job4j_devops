@@ -11,6 +11,9 @@ plugins {
 
 group = "ru.job4j.devops"
 version = "1.0.0"
+val dbUrl = System.getenv("DB_URL") ?: error("DB_URL not set")
+val dbUsername = System.getenv("DB_USERNAME") ?: error("DB_USERNAME not set")
+val dbPassword = System.getenv("DB_PASSWORD") ?: error("DB_PASSWORD not set")
 
 tasks.jacocoTestCoverageVerification {
     violationRules {
@@ -128,13 +131,6 @@ tasks.register<Zip>("archiveResources") {
     }
 }
 
-tasks.register("profile") {
-    doFirst {
-        println(env.DB_URL.value)
-    }
-}
-
-
 tasks.spotbugsMain {
     if (System.getenv("EXTRA_TASK_ACTIVE") != null) {
         reports.create("html") {
@@ -144,29 +140,36 @@ tasks.spotbugsMain {
     }
 }
 
-tasks.named<Test>("test") {
-    systemProperty("spring.datasource.url", env.DB_URL.value)
-    systemProperty("spring.datasource.username", env.DB_USERNAME.value)
-    systemProperty("spring.datasource.password", env.DB_PASSWORD.value)
-}
-
-
-tasks.test {
-    if (System.getenv("EXTRA_TASK_ACTIVE") != null) {
-        finalizedBy(tasks.spotbugsMain)
+tasks.register("profile") {
+    doFirst {
+        println(dbUrl)
     }
 }
+
+
+tasks.named<Test>("test") {
+    systemProperty("spring.datasource.url", dbUrl)
+    systemProperty("spring.datasource.username", dbUsername)
+    systemProperty("spring.datasource.password", dbPassword)
+}
+
 
 liquibase {
     activities.register("main") {
         this.arguments = mapOf(
             "logLevel"       to "info",
-            "url"            to env.DB_URL.value,
-            "username"       to env.DB_USERNAME.value,
-            "password"       to env.DB_PASSWORD.value,
+            "url"            to dbUrl,
+            "username"       to dbUsername,
+            "password"       to dbPassword,
             "classpath"      to "src/main/resources",
             "changelogFile"  to "db/changelog/db.changelog-master.xml"
         )
     }
     runList = "main"
+}
+
+tasks.test {
+    if (System.getenv("EXTRA_TASK_ACTIVE") != null) {
+        finalizedBy(tasks.spotbugsMain)
+    }
 }
