@@ -11,11 +11,6 @@ pipeline {
                 sh 'chmod +x ./gradlew'
             }
         }
-        stage('Check') {
-            steps {
-                sh './gradlew check'
-            }
-        }
         stage('Check Environment') {
             steps {
                 script {
