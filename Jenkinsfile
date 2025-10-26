@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { label 'agent-devops' }
 
     tools {
         git 'Default'
@@ -11,7 +11,7 @@ pipeline {
                 sh 'chmod +x ./gradlew'
             }
         }
-        stage('Check env') {
+        stage('Check Environment') {
             steps {
                 script {
                     sh './gradlew check -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
