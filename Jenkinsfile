@@ -27,7 +27,12 @@ pipeline {
         }
         stage('Package') {
             steps {
-                sh './gradlew build -P"dotenv.filename"="/var/agent-jdk21/env/.env.develop"'
+                sh '''
+                                set -a
+                                source /var/agent-jdk21/env/.env.develop
+                                set +a
+                                ./gradlew build
+                            '''
             }
         }
         stage('JaCoCo Report') {
