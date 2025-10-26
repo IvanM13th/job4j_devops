@@ -5,9 +5,6 @@ pipeline {
         git 'Default'
     }
 
-    environment {
-        }
-
     stages {
         stage('Prepare Environment') {
             steps {
